@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from json_file_helper import save_json
+from file_utils import save_json, load_txt_into_dict
 
 
 class Analysis(ABC):
@@ -33,6 +33,7 @@ class Analysis(ABC):
 class WordFrequencyAnalysis(Analysis):
     def __init__(self):
         self.words = {}
+        self.stopwords = load_txt_into_dict("../data/stopwords.txt")
 
     @property
     def name(self):
@@ -42,7 +43,7 @@ class WordFrequencyAnalysis(Analysis):
         words = message.split(" ")
         for word in words:
             word = word.strip().lower()
-            if word == "":
+            if word == "" or word in self.stopwords:
                 continue
 
             if word in self.words:

@@ -6,8 +6,8 @@ class Analyzer:
 
     def analyze(self):
         file = open(self.messages_path)
-        with file as f:
-            for line in f:
+        with file:
+            for line in file:
                 [author, repo, lines, message] = line.split("::", 3)
                 for analysis in self.analyses:
                     analysis.analyze_commit(author, repo, lines, message)

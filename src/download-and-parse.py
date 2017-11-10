@@ -14,7 +14,7 @@ response = urllib.request.urlopen(url)
 compressed_file = io.BytesIO(response.read())
 file = gzip.GzipFile(fileobj=compressed_file)
 
-output_filename = "messages.txt"
+output_filename = "../outputs/messages.txt"
 output_mode = "a" if os.path.exists(output_filename) else "w"
 output_file = open(output_filename, output_mode)
 

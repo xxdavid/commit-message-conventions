@@ -1,0 +1,63 @@
+from abc import ABC, abstractmethod
+from json_file_helper import save_json
+
+
+class Analysis(ABC):
+    @property
+    @abstractmethod
+    def name(self):
+        pass
+
+    @abstractmethod
+    def analyze_commit(self, author, repo, lines, message):
+        pass
+
+    @property
+    @abstractmethod
+    def state(self):
+        pass
+
+    @state.setter
+    @abstractmethod
+    def state(self, value):
+        pass
+
+    @abstractmethod
+    def finalize(self):
+        pass
+
+    def save(self):
+        save_json(self.state, f"../outputs/intermediates/{self.name}.json")
+
+
+class WordFrequencyAnalysis(Analysis):
+    def __init__(self):
+        self.words = {}
+
+    @property
+    def name(self):
+        return "word_frequency"
+
+    def analyze_commit(self, author, repo, lines, message):
+        words = message.split(" ")
+        for word in words:
+            word = word.strip().lower()
+            if word == "":
+                continue
+
+            if word in self.words:
+                self.words[word] += 1
+            else:
+                self.words[word] = 1
+
+    def finalize(self):
+        sorted_keys = sorted(self.words, key=self.words.get, reverse=True)
+        self.words = [{'word': word, 'count': self.words[word]} for word in sorted_keys]
+
+    @property
+    def state(self):
+        return self.words
+
+    @state.setter
+    def state(self, value):
+        self.words = value

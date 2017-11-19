@@ -28,4 +28,8 @@ with file as f:
             commits = event['payload']['commits']
             for commit in commits:
                 message_lines = commit['message'].split("\n")
-                output_file.write(f"{author}::{repo}::{len(message_lines)}::{message_lines[0]}\n")
+                first_line = message_lines[0].replace('\r', '')
+                if len(first_line) > 300:
+                    continue
+
+                output_file.write(f"{author}::{repo}::{len(message_lines)}::{first_line}\n")

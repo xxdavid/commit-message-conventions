@@ -62,3 +62,20 @@ class WordFrequencyAnalysis(Analysis):
     @state.setter
     def state(self, value):
         self.words = value
+
+
+class FirstWordFrequencyAnalysis(WordFrequencyAnalysis):
+    @property
+    def name(self):
+        return "first_word_frequency"
+
+    def analyze_commit(self, author, repo, lines, message):
+        words = message.split(" ")
+        word = words[0].strip().lower()
+
+        if word in self.words:
+            self.words[word] += 1
+        else:
+            self.words[word] = 1
+
+

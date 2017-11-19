@@ -3,5 +3,6 @@ from analyzer import Analyzer
 from analyses import *
 
 Analyzer("../outputs", "messages.txt", [
-    WordFrequencyAnalysis()
+    WordFrequencyAnalysis(),
+    FirstWordFrequencyAnalysis()
 ]).analyze()

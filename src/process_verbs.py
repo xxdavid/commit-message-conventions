@@ -3,7 +3,7 @@ import re
 from file_utils import open_file_dir_safe
 
 input_file = open("../data/raw/verbs.txt")
-output_file = open_file_dir_safe("../data/processed/infinitives.txt", "w")
+output_file = open_file_dir_safe("../data/processed/infinitive.txt", "w")
 
 with input_file, output_file:
     for line in input_file:

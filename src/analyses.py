@@ -33,7 +33,7 @@ class Analysis(ABC):
 class WordFrequencyAnalysis(Analysis):
     def __init__(self):
         self.words = {}
-        self.stopwords = load_txt_into_dict("../data/stopwords.txt")
+        self.stopwords = load_txt_into_dict("../data/raw/stopwords.txt")
 
     @property
     def name(self):

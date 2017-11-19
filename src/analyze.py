@@ -4,5 +4,6 @@ from analyses import *
 
 Analyzer("../outputs", "messages.txt", [
     WordFrequencyAnalysis(),
-    FirstWordFrequencyAnalysis()
+    FirstWordFrequencyAnalysis(),
+    VerbFormAnalysis()
 ]).analyze()

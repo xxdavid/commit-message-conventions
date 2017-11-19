@@ -22,7 +22,6 @@ class Analysis(ABC):
     def state(self, value):
         pass
 
-    @abstractmethod
     def finalize(self):
         pass
 
@@ -79,3 +78,42 @@ class FirstWordFrequencyAnalysis(WordFrequencyAnalysis):
             self.words[word] = 1
 
 
+class VerbFormAnalysis(Analysis):
+    def __init__(self):
+        self.n_infinitive = 0
+        self.n_gerund = 0
+        self.n_third_person = 0
+        self.n_past_tense = 0
+        self.n_non_verb = 0
+
+        self.infinitive_list = load_txt_into_set("../data/processed/infinitive.txt")
+        self.gerund_list = load_txt_into_set("../data/processed/gerund.txt")
+        self.third_person_list = load_txt_into_set("../data/processed/third_person.txt")
+        self.past_tense_list = load_txt_into_set("../data/processed/past_tense.txt")
+
+    @property
+    def name(self):
+        return "verb_form"
+
+    def analyze_commit(self, author, repo, lines, message):
+        word = message.split(" ")[0].strip().lower()
+        if word in self.infinitive_list:
+            self.n_infinitive += 1
+        elif word in self.gerund_list:
+            self.n_gerund += 1
+        elif word in self.third_person_list:
+            self.n_third_person += 1
+        elif word in self.past_tense_list:
+            self.n_past_tense += 1
+        else:
+            self.n_non_verb += 1
+
+    @property
+    def state(self):
+        return {
+            'infinitive': self.n_infinitive,
+            'gerund': self.n_gerund,
+            'third_person': self.n_third_person,
+            'past_tense': self.n_past_tense,
+            'non_verb': self.n_non_verb
+        }

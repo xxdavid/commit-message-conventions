@@ -38,6 +38,8 @@ for infinitive in infinitives:
         past_tense = infinitive + "d"
     elif re.search(f"{consonant}{vowel}{consonant}$", infinitive):
         past_tense = infinitive + infinitive[-1] + "ed"
+    elif re.search(f"{consonant}y$", infinitive):
+        past_tense = infinitive[:-1] + "ied"
     else:
         past_tense = infinitive + "ed"
     past_tense_file.write(past_tense + "\n")

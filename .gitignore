@@ -1,2 +1,4 @@
 messages.txt
 .idea/
+src/__pycache__/
+outputs/

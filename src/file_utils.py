@@ -21,6 +21,7 @@ def load_json(path):
     return json.load(file)
 
 
+# TODO set instead of dict
 def load_txt_into_dict(path, skip_first_line=True, value=True):
     result = {}
     file = open_file_dir_safe(path)

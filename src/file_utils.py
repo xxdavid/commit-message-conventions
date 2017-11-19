@@ -21,8 +21,8 @@ def load_json(path):
     return json.load(file)
 
 
-def load_txt_into_dict(path, skip_first_line=True, value=True):
-    result = {}
+def load_txt_into_set(path, skip_first_line=True):
+    result = set()
     file = open_file_dir_safe(path)
     with file:
         if skip_first_line:
@@ -30,6 +30,6 @@ def load_txt_into_dict(path, skip_first_line=True, value=True):
 
         for line in file:
             line = line.strip()
-            result[line] = value
+            result.add(line)
 
     return result

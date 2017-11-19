@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-from file_utils import load_txt_into_dict, load_json, open_file_dir_safe
+from file_utils import load_txt_into_set, load_json, open_file_dir_safe
 import re
 
-infinitives = load_txt_into_dict("../data/processed/infinitives.txt")
+infinitives = load_txt_into_set("../data/processed/infinitives.txt")
 irregular = load_json("../data/processed/irregular_verbs.json")
 
 third_person_file = open_file_dir_safe("../data/processed/third_person.txt", 'w')

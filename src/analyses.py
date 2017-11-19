@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from file_utils import save_json, load_txt_into_dict
+from file_utils import save_json, load_txt_into_set
 
 
 class Analysis(ABC):
@@ -33,7 +33,7 @@ class Analysis(ABC):
 class WordFrequencyAnalysis(Analysis):
     def __init__(self):
         self.words = {}
-        self.stopwords = load_txt_into_dict("../data/raw/stopwords.txt")
+        self.stopwords = load_txt_into_set("../data/raw/stopwords.txt")
 
     @property
     def name(self):

@@ -5,6 +5,7 @@ import json
 import gzip
 import urllib.request
 import io
+from file_utils import open_file_dir_safe
 
 date = sys.argv[1]
 
@@ -16,7 +17,7 @@ file = gzip.GzipFile(fileobj=compressed_file)
 
 output_filename = "../outputs/messages.txt"
 output_mode = "a" if os.path.exists(output_filename) else "w"
-output_file = open(output_filename, output_mode)
+output_file = open_file_dir_safe(output_filename, output_mode)
 
 with file as f:
     for line in f:

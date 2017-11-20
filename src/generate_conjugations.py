@@ -43,3 +43,17 @@ for infinitive in infinitives:
     else:
         past_tense = infinitive + "ed"
     past_tense_file.write(past_tense + "\n")
+
+gerund_exceptions = [
+    "fixing"  # generated as fixxing
+]
+past_tense_exceptions = [
+    "fixed"  # generated as fixxed
+]
+
+for word in gerund_exceptions:
+    gerund_file.write(word + "\n")
+
+for word in past_tense_exceptions:
+    past_tense_file.write(word + "\n")
+

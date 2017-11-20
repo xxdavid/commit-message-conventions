@@ -12016,3 +12016,5 @@ swamp
 char
 haze
 deflagrate
+sync
+shut

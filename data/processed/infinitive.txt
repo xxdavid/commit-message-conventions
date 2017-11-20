@@ -4247,7 +4247,6 @@ rubricate
 undersign
 ink
 autograph
-initial
 countersign
 execute
 endorse

@@ -9,7 +9,9 @@ with input_file, output_file:
     for line in input_file:
         match = re.match("""^[0-9]{8}\s[0-9]{2}\s[a-z]\s[0-9]{2}\s([a-zA-Z]*)\s""", line)
         if match:
-            output_file.write(match.group(1) + "\n")
+            word = match.group(1)
+            if not word == "initial":
+                output_file.write(match.group(1) + "\n")
 
     additional = [
         "sync",

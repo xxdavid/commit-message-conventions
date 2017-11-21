@@ -5,5 +5,8 @@ from analyses import *
 Analyzer("../outputs", "messages.txt", [
     WordFrequencyAnalysis(),
     FirstWordFrequencyAnalysis(),
-    VerbFormAnalysis()
+    VerbFormAnalysis(),
+    MessageLengthAnalysis(),
+    MessageLineCountAnalysis(),
+    BinaryAnalyses(),
 ]).analyze()

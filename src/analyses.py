@@ -184,4 +184,34 @@ class MessageLineCountAnalysis(Analysis):
     @property
     def state(self):
         return self.lineCounts
+
+
+class BinaryAnalyses(Analysis):
+    def __init__(self):
+        self.analyses = {
+            'total': lambda x: True,
+            'capital_letter': lambda x: x[0].isupper(),
+            'full_stop': lambda x: x[-1] == ".",
+            'capslock': lambda x: all(c.isupper() for c in x),
+            'non_ascii_chars': lambda x: any(ord(c) > 128 for c in x)
         }
+
+        self.counts = {}
+        for analysis in self.analyses:
+            self.counts[analysis] = 0
+
+    @property
+    def name(self):
+        return "binary"
+
+    def analyze_commit(self, author, repo, lines, message):
+        first_line = message.split("\n")[0].strip()
+
+        if len(first_line) > 0:
+            for analysis in self.analyses:
+                if self.analyses[analysis](first_line):
+                    self.counts[analysis] += 1
+
+    @property
+    def state(self):
+        return self.counts

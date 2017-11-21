@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from file_utils import save_json, load_txt_into_set
+import re
 
 
 class Analysis(ABC):
@@ -80,16 +81,25 @@ class FirstWordFrequencyAnalysis(WordFrequencyAnalysis):
 
 class VerbFormAnalysis(Analysis):
     def __init__(self):
-        self.n_infinitive = 0
-        self.n_gerund = 0
-        self.n_third_person = 0
-        self.n_past_tense = 0
-        self.n_non_verb = 0
+        self.forms = [
+            "infinitive",
+            "gerund",
+            "third_person",
+            "past_tense"
+        ]
 
-        self.infinitive_list = load_txt_into_set("../data/processed/infinitive.txt")
-        self.gerund_list = load_txt_into_set("../data/processed/gerund.txt")
-        self.third_person_list = load_txt_into_set("../data/processed/third_person.txt")
-        self.past_tense_list = load_txt_into_set("../data/processed/past_tense.txt")
+        self.lists = {}
+        for form in self.forms:
+            self.lists[form] = load_txt_into_set(f"../data/processed/{form}.txt")
+
+        self.counts = {}
+        for form in self.forms:
+            self.counts[form] = 0
+        self.counts['non_verb'] = 0
+
+        self.frequencies = {}
+        for form in self.forms:
+            self.frequencies[form] = {}
 
     @property
     def name(self):
@@ -97,23 +107,41 @@ class VerbFormAnalysis(Analysis):
 
     def analyze_commit(self, author, repo, lines, message):
         word = message.split(" ")[0].strip().lower()
-        if word in self.infinitive_list:
-            self.n_infinitive += 1
-        elif word in self.gerund_list:
-            self.n_gerund += 1
-        elif word in self.third_person_list:
-            self.n_third_person += 1
-        elif word in self.past_tense_list:
-            self.n_past_tense += 1
+        if not self.analyze_word(word):
+            word = re.sub("^.*:\s*", "", message).split(" ")[0].lower()
+            if not self.analyze_word(word):
+                word = re.sub("^\[.*\]\s*", "", message).split(" ")[0].lower()
+                if not self.analyze_word(word):
+                    self.counts['non_verb'] += 1
+
+    def analyze_word(self, word):
+        for form in self.forms:
+            if word in self.lists[form]:
+                self.counts[form] += 1
+                self.count_frequency(word, form)
+                return True
+        return False
+
+    def count_frequency(self, word, form):
+        if word in self.frequencies[form]:
+            self.frequencies[form][word] += 1
         else:
-            self.n_non_verb += 1
+            self.frequencies[form][word] = 1
+
+    def sort_frequencies(self):
+        for form in self.forms:
+            sorted_keys = \
+                sorted(self.frequencies[form], key=self.frequencies[form].get, reverse=True)
+            self.frequencies[form] = \
+                [{'word': word, 'count': self.frequencies[form][word]} for word in sorted_keys]
+
+    def finalize(self):
+        self.sort_frequencies()
 
     @property
     def state(self):
         return {
-            'infinitive': self.n_infinitive,
-            'gerund': self.n_gerund,
-            'third_person': self.n_third_person,
-            'past_tense': self.n_past_tense,
-            'non_verb': self.n_non_verb
+            'total_counts': self.counts,
+            'frequencies': self.frequencies
+        }
         }

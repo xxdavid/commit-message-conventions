@@ -144,4 +144,24 @@ class VerbFormAnalysis(Analysis):
             'total_counts': self.counts,
             'frequencies': self.frequencies
         }
+
+
+class MessageLengthAnalysis(Analysis):
+    def __init__(self):
+        self.lengths = {}
+
+    @property
+    def name(self):
+        return "message_length"
+
+    def analyze_commit(self, author, repo, lines, message):
+        length = len(message.split("\n")[0])
+        if length in self.lengths:
+            self.lengths[length] += 1
+        else:
+            self.lengths[length] = 1
+
+    @property
+    def state(self):
+        return self.lengths
         }

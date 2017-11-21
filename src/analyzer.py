@@ -18,7 +18,7 @@ class Analyzer:
                     self.authors[author] = 0
                 if self.authors[author] < self.MAX_COMMITS_BY_AUTHOR:
                     for analysis in self.analyses:
-                        analysis.analyze_commit(author, repo, lines, message)
+                        analysis.analyze_commit(author, repo, lines, message.strip())
                     self.authors[author] += 1
                     self.analyzed_number += 1
                 self.total_number += 1

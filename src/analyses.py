@@ -42,7 +42,7 @@ class WordFrequencyAnalysis(Analysis):
     def analyze_commit(self, author, repo, lines, message):
         words = message.split(" ")
         for word in words:
-            word = word.strip().lower()
+            word = word.lower()
             if word == "" or word in self.stopwords:
                 continue
 
@@ -71,7 +71,7 @@ class FirstWordFrequencyAnalysis(WordFrequencyAnalysis):
 
     def analyze_commit(self, author, repo, lines, message):
         words = message.split(" ")
-        word = words[0].strip().lower()
+        word = words[0].lower()
 
         if word in self.words:
             self.words[word] += 1
@@ -106,7 +106,7 @@ class VerbFormAnalysis(Analysis):
         return "verb_form"
 
     def analyze_commit(self, author, repo, lines, message):
-        word = message.split(" ")[0].strip().lower()
+        word = message.split(" ")[0].lower()
         if not self.analyze_word(word):
             word = re.sub("^.*:\s*", "", message).split(" ")[0].lower()
             if not self.analyze_word(word):
@@ -155,7 +155,7 @@ class MessageLengthAnalysis(Analysis):
         return "message_length"
 
     def analyze_commit(self, author, repo, lines, message):
-        length = len(message.split("\n")[0])
+        length = len(message)
         if length in self.lengths:
             self.lengths[length] += 1
         else:
@@ -175,11 +175,10 @@ class MessageLineCountAnalysis(Analysis):
         return "message_line_count"
 
     def analyze_commit(self, author, repo, lines, message):
-        count = len(message.split("\n"))
-        if count in self.lineCounts:
-            self.lineCounts[count] += 1
+        if lines in self.lineCounts:
+            self.lineCounts[lines] += 1
         else:
-            self.lineCounts[count] = 1
+            self.lineCounts[lines] = 1
 
     @property
     def state(self):
@@ -205,11 +204,9 @@ class BinaryAnalyses(Analysis):
         return "binary"
 
     def analyze_commit(self, author, repo, lines, message):
-        first_line = message.split("\n")[0].strip()
-
-        if len(first_line) > 0:
+        if len(message) > 0:
             for analysis in self.analyses:
-                if self.analyses[analysis](first_line):
+                if self.analyses[analysis](message):
                     self.counts[analysis] += 1
 
     @property

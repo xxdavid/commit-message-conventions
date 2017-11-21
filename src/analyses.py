@@ -164,4 +164,24 @@ class MessageLengthAnalysis(Analysis):
     @property
     def state(self):
         return self.lengths
+
+
+class MessageLineCountAnalysis(Analysis):
+    def __init__(self):
+        self.lineCounts = {}
+
+    @property
+    def name(self):
+        return "message_line_count"
+
+    def analyze_commit(self, author, repo, lines, message):
+        count = len(message.split("\n"))
+        if count in self.lineCounts:
+            self.lineCounts[count] += 1
+        else:
+            self.lineCounts[count] = 1
+
+    @property
+    def state(self):
+        return self.lineCounts
         }

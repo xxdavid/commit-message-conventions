@@ -6,7 +6,7 @@ from file_utils import load_json
 
 class Plotter(ABC):
     def __init__(self):
-        self.data = load_json(f"../outputs/intermediates/{self.input_file_name}.json")
+        self.data = load_json(f"../outputs/json/{self.input_file_name}.json")
 
     @property
     @abstractmethod

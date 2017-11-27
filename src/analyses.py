@@ -27,7 +27,7 @@ class Analysis(ABC):
         pass
 
     def save(self):
-        save_json(self.state, f"../outputs/intermediates/{self.name}.json")
+        save_json(self.state, f"../outputs/json/{self.name}.json")
 
 
 class WordFrequencyAnalysis(Analysis):

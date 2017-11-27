@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import re
+
+from config import Directories
 from file_utils import open_file_dir_safe
 
-input_file = open("../data/raw/verbs.txt")
-output_file = open_file_dir_safe("../data/processed/infinitive.txt", "w")
+input_file = open(f"{Directories.raw_data}/verbs.txt")
+output_file = open_file_dir_safe(f"{Directories.processed_data}/infinitive.txt", "w")
 
 with input_file, output_file:
     for line in input_file:

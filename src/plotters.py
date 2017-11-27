@@ -1,12 +1,14 @@
 from abc import ABC, abstractmethod
 import matplotlib.pyplot as plt
 import numpy as np
+
+from config import Directories
 from file_utils import load_json
 
 
 class Plotter(ABC):
     def __init__(self):
-        self.data = load_json(f"../outputs/json/{self.input_file_name}.json")
+        self.data = load_json(f"{Directories.json_outputs}/{self.input_file_name}.json")
 
     @property
     @abstractmethod
@@ -53,8 +55,8 @@ class Plotter(ABC):
 
         plt.tight_layout()
 
-        plt.savefig(f"../outputs/charts/{self.name}.png", transparent=True)
-        plt.savefig(f"../outputs/charts/{self.name}.svg")
+        plt.savefig(f"{Directories.charts}/{self.name}.png", transparent=True)
+        plt.savefig(f"{Directories.charts}/{self.name}.svg")
         plt.close()
 
 

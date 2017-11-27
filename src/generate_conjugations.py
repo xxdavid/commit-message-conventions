@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
+from config import Directories
 from file_utils import load_txt_into_set, load_json, open_file_dir_safe
 import re
 
-infinitives = load_txt_into_set("../data/processed/infinitive.txt")
-irregular = load_json("../data/processed/irregular_verbs.json")
+infinitives = load_txt_into_set(f"{Directories.processed_data}/infinitive.txt")
+irregular = load_json(f"{Directories.processed_data}/irregular_verbs.json")
 
-imperative_file = open_file_dir_safe("../data/processed/imperative.txt", 'w')
-third_person_file = open_file_dir_safe("../data/processed/third_person.txt", 'w')
-gerund_file = open_file_dir_safe("../data/processed/gerund.txt", 'w')
-past_tense_file = open_file_dir_safe("../data/processed/past_tense.txt", 'w')
+imperative_file = open_file_dir_safe(f"{Directories.processed_data}/imperative.txt", 'w')
+third_person_file = open_file_dir_safe(f"{Directories.processed_data}/third_person.txt", 'w')
+gerund_file = open_file_dir_safe(f"{Directories.processed_data}/gerund.txt", 'w')
+past_tense_file = open_file_dir_safe(f"{Directories.processed_data}/past_tense.txt", 'w')
 
 vowel = "[aeiouy]"
 consonant = "[b-df-hj-np-tv-z]"

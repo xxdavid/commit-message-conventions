@@ -1,6 +1,8 @@
+from config import Directories
+
+
 class Analyzer:
-    def __init__(self, commits_path, analyses):
-        self.commits_path = commits_path
+    def __init__(self, analyses):
         self.analyses = analyses
         self.authors = {}
         self.total_number = 0
@@ -9,7 +11,7 @@ class Analyzer:
         self.MAX_COMMITS_BY_AUTHOR = 3
 
     def analyze(self):
-        file = open(self.commits_path)
+        file = open(f"{Directories.processed_data}/commits.txt")
         with file:
             for line in file:
                 [author, repo, lines, message] = line.split("::", 3)

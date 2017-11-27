@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from file_utils import save_json, load_txt_into_set
 import re
+from config import Directories
 
 
 class Analysis(ABC):
@@ -27,13 +28,13 @@ class Analysis(ABC):
         pass
 
     def save(self):
-        save_json(self.state, f"../outputs/json/{self.name}.json")
+        save_json(self.state, f"{Directories.json_outputs}/{self.name}.json")
 
 
 class WordFrequencyAnalysis(Analysis):
     def __init__(self):
         self.words = {}
-        self.stopwords = load_txt_into_set("../data/raw/stopwords.txt")
+        self.stopwords = load_txt_into_set(f"{Directories.raw_data}/stopwords.txt")
 
     @property
     def name(self):
@@ -90,7 +91,7 @@ class VerbFormAnalysis(Analysis):
 
         self.lists = {}
         for form in self.forms:
-            self.lists[form] = load_txt_into_set(f"../data/processed/{form}.txt")
+            self.lists[form] = load_txt_into_set(f"{Directories.processed_data}/{form}.txt")
 
         self.counts = {}
         for form in self.forms:

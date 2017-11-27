@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 from pyquery import PyQuery as pq
 import re
+
+from config import Directories
 from file_utils import save_json
 
-doc = pq(filename='../data/raw/irregular_verbs.html')
+doc = pq(filename=f'{Directories.raw_data}/irregular_verbs.html')
 
 table = doc(".wikitable")
 tds = table("tr td:first")
@@ -20,4 +22,4 @@ for text in texts:
         infinitive = conjugations.pop(0)
         words[infinitive] = conjugations[0]
 
-save_json(words, "../data/processed/irregular_verbs.json")
+save_json(words, f"{Directories.processed_data}/irregular_verbs.json")

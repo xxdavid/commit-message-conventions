@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
+from config import Directories
 from plotters import *
 from os import makedirs
 
-makedirs("../outputs/charts", exist_ok=True)
+makedirs(Directories.charts, exist_ok=True)
 
 FirstWordFrequencyPlotter().plot()
 WordFrequencyPlotter().plot()

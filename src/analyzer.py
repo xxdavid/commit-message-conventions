@@ -1,7 +1,6 @@
 class Analyzer:
-    def __init__(self, outputs_dir, messages_filename, analyses):
-        self.outputs_dir = outputs_dir
-        self.messages_path = outputs_dir + '/' + messages_filename
+    def __init__(self, commits_path, analyses):
+        self.commits_path = commits_path
         self.analyses = analyses
         self.authors = {}
         self.total_number = 0
@@ -10,7 +9,7 @@ class Analyzer:
         self.MAX_COMMITS_BY_AUTHOR = 3
 
     def analyze(self):
-        file = open(self.messages_path)
+        file = open(self.commits_path)
         with file:
             for line in file:
                 [author, repo, lines, message] = line.split("::", 3)

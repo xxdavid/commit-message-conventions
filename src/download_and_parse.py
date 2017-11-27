@@ -10,12 +10,13 @@ from file_utils import open_file_dir_safe
 date = sys.argv[1]
 
 url = f"http://data.githubarchive.org/{date}.json.gz"
+print(url)
 
 response = urllib.request.urlopen(url)
 compressed_file = io.BytesIO(response.read())
 file = gzip.GzipFile(fileobj=compressed_file)
 
-output_filename = "../outputs/messages.txt"
+output_filename = "../data/processed/commits.txt"
 output_mode = "a" if os.path.exists(output_filename) else "w"
 output_file = open_file_dir_safe(output_filename, output_mode)
 

@@ -2,7 +2,7 @@
 from analyzer import Analyzer
 from analyses import *
 
-Analyzer("../outputs", "messages.txt", [
+Analyzer("../data/processed/commits.txt", [
     WordFrequencyAnalysis(),
     FirstWordFrequencyAnalysis(),
     VerbFormAnalysis(),

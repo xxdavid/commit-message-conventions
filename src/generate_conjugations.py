@@ -5,6 +5,7 @@ import re
 infinitives = load_txt_into_set("../data/processed/infinitive.txt")
 irregular = load_json("../data/processed/irregular_verbs.json")
 
+imperative_file = open_file_dir_safe("../data/processed/imperative.txt", 'w')
 third_person_file = open_file_dir_safe("../data/processed/third_person.txt", 'w')
 gerund_file = open_file_dir_safe("../data/processed/gerund.txt", 'w')
 past_tense_file = open_file_dir_safe("../data/processed/past_tense.txt", 'w')
@@ -13,6 +14,11 @@ vowel = "[aeiouy]"
 consonant = "[b-df-hj-np-tv-z]"
 
 for infinitive in infinitives:
+    # imperative
+    # I know this is a duplicity but the two files have
+    # a slightly different meaning and purpose
+    imperative_file.write(infinitive + "\n")
+
     # third person
     if re.search(f"{consonant}y$", infinitive):
         third_person = infinitive[:-1] + "ies"

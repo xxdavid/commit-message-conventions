@@ -188,10 +188,10 @@ class VerbFormWordsPlotter(WordFrequencyPlotter, ABC):
         return values
 
 
-class InfinitiveWordsPlotter(VerbFormWordsPlotter):
+class ImperativePlotter(VerbFormWordsPlotter):
     @property
     def form(self):
-        return "infinitive"
+        return "imperative"
 
 
 class GerundWordsPlotter(VerbFormWordsPlotter):

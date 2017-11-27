@@ -82,7 +82,7 @@ class FirstWordFrequencyAnalysis(WordFrequencyAnalysis):
 class VerbFormAnalysis(Analysis):
     def __init__(self):
         self.forms = [
-            "infinitive",
+            "imperative",
             "gerund",
             "third_person",
             "past_tense"

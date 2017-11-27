@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 from plotters import *
+from os import makedirs
+
+makedirs("../outputs/charts", exist_ok=True)
 
 FirstWordFrequencyPlotter().plot()
 WordFrequencyPlotter().plot()

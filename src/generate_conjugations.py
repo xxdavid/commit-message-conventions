@@ -63,4 +63,3 @@ for word in gerund_exceptions:
 
 for word in past_tense_exceptions:
     past_tense_file.write(word + "\n")
-

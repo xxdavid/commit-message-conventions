@@ -13,7 +13,11 @@ texts = list(tds.map(lambda i, el: pq(el).text()))
 
 words = {}
 for text in texts:
-    groups = re.findall("""(?:\w|/|\*|(?: /))+ – (?:\w|/|\*)+ – (?:\w|/|\*)+""", text)
+    groups = re.findall(
+        """(?:\w|/|\*|(?: /))+ – (?:\w|/|\*)+ – (?:\w|/|\*)+""",
+        text
+    )
+
     for group in groups:
         if group[0] == '*':
             continue  # archaic

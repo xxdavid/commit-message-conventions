@@ -8,7 +8,8 @@ from file_utils import load_json
 
 class Plotter(ABC):
     def __init__(self):
-        self.data = load_json(f"{Directories.json_outputs}/{self.input_file_name}.json")
+        self.data = \
+            load_json(f"{Directories.json_outputs}/{self.input_file_name}.json")
 
     @property
     @abstractmethod
@@ -119,7 +120,10 @@ class WordFrequencyPlotter(BarPlotter):
         total_count = sum(x['count'] for x in self.data)
 
         top_words = self.data[:self.n_top_words]
-        values = [(x['word'], x['count'] * 100 / total_count) for x in top_words]
+        values = [
+            (x['word'], x['count'] * 100 / total_count)
+            for x in top_words
+        ]
 
         return values
 
@@ -155,8 +159,10 @@ class VerbFormOverviewPlotter(BarPlotter):
         counts = self.data['total_counts']
         total_count = sum(counts.values())
 
-        values = [(x.replace("_", " ").capitalize(), counts[x] * 100 / total_count)
-                  for x in counts]
+        values = [
+            (x.replace("_", " ").capitalize(), counts[x] * 100 / total_count)
+            for x in counts
+        ]
         values.sort(key=lambda x: x[1], reverse=True)
 
         return values
@@ -185,7 +191,10 @@ class VerbFormWordsPlotter(WordFrequencyPlotter, ABC):
         total_count = self.data['total_counts'][self.form]
 
         top_words = self.data['frequencies'][self.form][:self.n_top_words]
-        values = [(x['word'], x['count'] * 100 / total_count) for x in top_words]
+        values = [
+            (x['word'], x['count'] * 100 / total_count)
+            for x in top_words
+        ]
 
         return values
 

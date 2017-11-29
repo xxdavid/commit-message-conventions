@@ -34,7 +34,8 @@ class Analysis(ABC):
 class WordFrequencyAnalysis(Analysis):
     def __init__(self):
         self.words = {}
-        self.stopwords = load_txt_into_set(f"{Directories.raw_data}/stopwords.txt")
+        self.stopwords =\
+            load_txt_into_set(f"{Directories.raw_data}/stopwords.txt")
 
     @property
     def name(self):
@@ -54,7 +55,8 @@ class WordFrequencyAnalysis(Analysis):
 
     def finalize(self):
         sorted_keys = sorted(self.words, key=self.words.get, reverse=True)
-        self.words = [{'word': word, 'count': self.words[word]} for word in sorted_keys]
+        self.words = [{'word': word, 'count': self.words[word]}
+                      for word in sorted_keys]
 
     @property
     def state(self):
@@ -91,7 +93,8 @@ class VerbFormAnalysis(Analysis):
 
         self.lists = {}
         for form in self.forms:
-            self.lists[form] = load_txt_into_set(f"{Directories.processed_data}/{form}.txt")
+            self.lists[form] =\
+                load_txt_into_set(f"{Directories.processed_data}/{form}.txt")
 
         self.counts = {}
         for form in self.forms:
@@ -131,10 +134,16 @@ class VerbFormAnalysis(Analysis):
 
     def sort_frequencies(self):
         for form in self.forms:
-            sorted_keys = \
-                sorted(self.frequencies[form], key=self.frequencies[form].get, reverse=True)
-            self.frequencies[form] = \
-                [{'word': word, 'count': self.frequencies[form][word]} for word in sorted_keys]
+            sorted_keys = sorted(
+                self.frequencies[form],
+                key=self.frequencies[form].get,
+                reverse=True
+            )
+
+            self.frequencies[form] = [
+                {'word': word, 'count': self.frequencies[form][word]}
+                for word in sorted_keys
+            ]
 
     def finalize(self):
         self.sort_frequencies()

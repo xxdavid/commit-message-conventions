@@ -18,8 +18,9 @@ class Analyzer:
                 if author not in self.authors:
                     self.authors[author] = 0
                 if self.authors[author] < self.MAX_COMMITS_BY_AUTHOR:
+                    message = message.strip()
                     for analysis in self.analyses:
-                        analysis.analyze_commit(author, repo, lines, message.strip())
+                        analysis.analyze_commit(author, repo, lines, message)
                     self.authors[author] += 1
                     self.analyzed_number += 1
                 self.total_number += 1
@@ -28,4 +29,5 @@ class Analyzer:
             analysis.finalize()
             analysis.save()
 
-        print(f"Analyzed {self.analyzed_number} commits (out of {self.total_number}).")
+        print(f"Analyzed {self.analyzed_number} commits"
+              f" (out of {self.total_number}).")

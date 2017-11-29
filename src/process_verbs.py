@@ -5,11 +5,15 @@ from config import Directories
 from file_utils import open_file_dir_safe
 
 input_file = open(f"{Directories.raw_data}/verbs.txt")
-output_file = open_file_dir_safe(f"{Directories.processed_data}/infinitive.txt", "w")
+output_file =\
+    open_file_dir_safe(f"{Directories.processed_data}/infinitive.txt", "w")
 
 with input_file, output_file:
     for line in input_file:
-        match = re.match("""^[0-9]{8}\s[0-9]{2}\s[a-z]\s[0-9]{2}\s([a-zA-Z]*)\s""", line)
+        match = re.match(
+            """^[0-9]{8}\s[0-9]{2}\s[a-z]\s[0-9]{2}\s([a-zA-Z]*)\s""",
+            line
+        )
         if match:
             word = match.group(1)
             if not word == "initial":

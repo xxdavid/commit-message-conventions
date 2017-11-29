@@ -34,4 +34,5 @@ with file as f:
                 if len(first_line) > 300:
                     continue
 
-                output_file.write(f"{author}::{repo}::{len(message_lines)}::{first_line}\n")
+                output_file.write(f"{author}::{repo}::"
+                                  f"{len(message_lines)}::{first_line}\n")

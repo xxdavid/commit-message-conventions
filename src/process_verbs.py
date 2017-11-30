@@ -6,7 +6,7 @@ from file_utils import open_file_dir_safe
 
 input_file = open(f"{Directories.raw_data}/verbs.txt")
 output_file =\
-    open_file_dir_safe(f"{Directories.processed_data}/infinitive.txt", "w")
+    open_file_dir_safe(f"{Directories.processed_data}/infinitive.txt", 'w')
 
 with input_file, output_file:
     for line in input_file:

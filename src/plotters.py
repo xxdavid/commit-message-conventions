@@ -102,7 +102,7 @@ class LinePlotter(Plotter):
 class WordFrequencyPlotter(BarPlotter):
     @property
     def name(self):
-        return "word_frequency"
+        return 'word_frequency'
 
     @property
     def title(self):
@@ -131,7 +131,7 @@ class WordFrequencyPlotter(BarPlotter):
 class FirstWordFrequencyPlotter(WordFrequencyPlotter):
     @property
     def name(self):
-        return "first_word_frequency"
+        return 'first_word_frequency'
 
     @property
     def title(self):
@@ -141,11 +141,11 @@ class FirstWordFrequencyPlotter(WordFrequencyPlotter):
 class VerbFormOverviewPlotter(BarPlotter):
     @property
     def name(self):
-        return "verb_form_overview"
+        return 'verb_form_overview'
 
     @property
     def input_file_name(self):
-        return "verb_form"
+        return 'verb_form'
 
     @property
     def title(self):
@@ -176,11 +176,11 @@ class VerbFormWordsPlotter(WordFrequencyPlotter, ABC):
 
     @property
     def name(self):
-        return f"verb_form_{self.form}_frequency"
+        return f'verb_form_{self.form}_frequency'
 
     @property
     def input_file_name(self):
-        return "verb_form"
+        return 'verb_form'
 
     @property
     def title(self):
@@ -202,31 +202,31 @@ class VerbFormWordsPlotter(WordFrequencyPlotter, ABC):
 class ImperativePlotter(VerbFormWordsPlotter):
     @property
     def form(self):
-        return "imperative"
+        return 'imperative'
 
 
 class GerundWordsPlotter(VerbFormWordsPlotter):
     @property
     def form(self):
-        return "gerund"
+        return 'gerund'
 
 
 class ThirdPersonWordsPlotter(VerbFormWordsPlotter):
     @property
     def form(self):
-        return "third_person"
+        return 'third_person'
 
 
 class PastTenseWordsPlotter(VerbFormWordsPlotter):
     @property
     def form(self):
-        return "past_tense"
+        return 'past_tense'
 
 
 class MessageLengthPlotter(LinePlotter):
     @property
     def name(self):
-        return "message_length"
+        return 'message_length'
 
     @property
     def title(self):
@@ -249,7 +249,7 @@ class MessageLengthPlotter(LinePlotter):
 class MessageLinesPlotter(LinePlotter):
     @property
     def name(self):
-        return "message_line_count"
+        return 'message_line_count'
 
     @property
     def title(self):
@@ -272,7 +272,7 @@ class MessageLinesPlotter(LinePlotter):
 class BinaryAnalysesPlotter(BarPlotter):
     @property
     def name(self):
-        return "binary"
+        return 'binary'
 
     @property
     def title(self):
@@ -290,10 +290,10 @@ class BinaryAnalysesPlotter(BarPlotter):
         total_count = self.data['total']
 
         labels = {
-            'capital_letter': 'Capital letter',
-            'full_stop': 'Full stop',
-            'capslock': 'CAPSLOCK ON',
-            'non_ascii_chars': 'Contains non-ASCII chars'
+            'capital_letter': "Capital letter",
+            'full_stop': "Full stop",
+            'capslock': "CAPSLOCK ON",
+            'non_ascii_chars': "Contains non-ASCII chars"
         }
 
         values = [

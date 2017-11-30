@@ -39,7 +39,7 @@ class WordFrequencyAnalysis(Analysis):
 
     @property
     def name(self):
-        return "word_frequency"
+        return 'word_frequency'
 
     def analyze_commit(self, author, repo, lines, message):
         words = message.split(" ")
@@ -70,7 +70,7 @@ class WordFrequencyAnalysis(Analysis):
 class FirstWordFrequencyAnalysis(WordFrequencyAnalysis):
     @property
     def name(self):
-        return "first_word_frequency"
+        return 'first_word_frequency'
 
     def analyze_commit(self, author, repo, lines, message):
         words = message.split(" ")
@@ -85,10 +85,10 @@ class FirstWordFrequencyAnalysis(WordFrequencyAnalysis):
 class VerbFormAnalysis(Analysis):
     def __init__(self):
         self.forms = [
-            "imperative",
-            "gerund",
-            "third_person",
-            "past_tense"
+            'imperative',
+            'gerund',
+            'third_person',
+            'past_tense'
         ]
 
         self.lists = {}
@@ -107,7 +107,7 @@ class VerbFormAnalysis(Analysis):
 
     @property
     def name(self):
-        return "verb_form"
+        return 'verb_form'
 
     def analyze_commit(self, author, repo, lines, message):
         word = message.split(" ")[0].lower()
@@ -162,7 +162,7 @@ class MessageLengthAnalysis(Analysis):
 
     @property
     def name(self):
-        return "message_length"
+        return 'message_length'
 
     def analyze_commit(self, author, repo, lines, message):
         length = len(message)
@@ -182,7 +182,7 @@ class MessageLineCountAnalysis(Analysis):
 
     @property
     def name(self):
-        return "message_line_count"
+        return 'message_line_count'
 
     def analyze_commit(self, author, repo, lines, message):
         if lines in self.lineCounts:
@@ -211,7 +211,7 @@ class BinaryAnalyses(Analysis):
 
     @property
     def name(self):
-        return "binary"
+        return 'binary'
 
     def analyze_commit(self, author, repo, lines, message):
         if len(message) > 0:

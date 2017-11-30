@@ -9,7 +9,7 @@ generator = ConjugationGenerator()
 
 forms = ['imperative', 'third_person', 'gerund', 'past_tense']
 for form in forms:
-    file = open_file_dir_safe(f"{Directories.processed_data}/{form}.txt", "w")
+    file = open_file_dir_safe(f"{Directories.processed_data}/{form}.txt", 'w')
     with file:
         for word in infinitives:
             method = getattr(generator, form)

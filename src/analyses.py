@@ -19,11 +19,6 @@ class Analysis(ABC):
     def state(self):
         pass
 
-    @state.setter
-    @abstractmethod
-    def state(self, value):
-        pass
-
     def finalize(self):
         pass
 
@@ -61,10 +56,6 @@ class WordFrequencyAnalysis(Analysis):
     @property
     def state(self):
         return self.words
-
-    @state.setter
-    def state(self, value):
-        self.words = value
 
 
 class FirstWordFrequencyAnalysis(WordFrequencyAnalysis):

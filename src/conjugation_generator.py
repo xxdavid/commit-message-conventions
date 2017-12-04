@@ -4,6 +4,12 @@ from file_utils import load_json
 
 
 class ConjugationGenerator:
+    """
+    Naive generator of verb conjugations.
+
+    All the methods take the infinitive and return the particular conjugation.
+    """
+
     def __init__(self):
         self.irregular =\
             load_json(f"{Directories.processed_data}/irregular_verbs.json")

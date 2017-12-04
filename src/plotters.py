@@ -7,6 +7,13 @@ from file_utils import load_json
 
 
 class Plotter(ABC):
+    """
+    Base plotter that plots a plot (haha).
+
+    Each plotter creates one charts.
+    Charts are saved into 'outputs/charts' directory in png and svg format.
+    """
+
     def __init__(self):
         self.data = \
             load_json(f"{Directories.json_outputs}/{self.input_file_name}.json")
@@ -14,10 +21,12 @@ class Plotter(ABC):
     @property
     @abstractmethod
     def name(self):
+        """Name of the plot used in the output chart filename."""
         pass
 
     @property
     def input_file_name(self):
+        """Name of the file to load the data from."""
         return self.name
 
     @property
@@ -36,13 +45,15 @@ class Plotter(ABC):
 
     @abstractmethod
     def init_plot(self):
+        """Set the data and initialize the plot."""
         pass
 
     @property
     def text_color(self):
-        return "#EAE3CB"
+        return "#000000"
 
     def plot(self):
+        """Compute the values and create a chart."""
         plt.rcParams['axes.labelcolor'] = self.text_color
         plt.rcParams['xtick.color'] = self.text_color
         plt.rcParams['ytick.color'] = self.text_color
@@ -64,6 +75,10 @@ class Plotter(ABC):
 class BarPlotter(Plotter):
     @abstractmethod
     def compute_values(self):
+        """
+        Compute the values for the chart.
+        :return: list of tuples in (x, y) format
+        """
         pass
 
     @property
@@ -89,6 +104,10 @@ class BarPlotter(Plotter):
 class LinePlotter(Plotter):
     @abstractmethod
     def compute_values(self):
+        """
+        Compute the values for the chart.
+        :return: list of tuples in (x, y) format
+        """
         pass
 
     def init_plot(self):

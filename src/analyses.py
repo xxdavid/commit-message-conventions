@@ -5,24 +5,54 @@ from config import Directories
 
 
 class Analysis(ABC):
+    """
+    Abstract analysis class.
+    Every analysis analyzes some aspect of a commit message.
+    On every commit message it gets, the analysis is performed
+    and then the results are eventually written to a file.
+    """
+
     @property
     @abstractmethod
     def name(self):
+        """Name of the analysis used in the output filename."""
         pass
 
     @abstractmethod
     def analyze_commit(self, author, repo, lines, message):
+        """
+        Run the analysis on a commit.
+        :param author: commit author (GitHub username)
+        :param repo: repository name
+        :param lines: number of lines of the commit message
+        :param message: commit message
+        """
         pass
 
     @property
     @abstractmethod
     def state(self):
+        """
+        Get the current state.
+        State should be serializable as it will be encoded to JSON
+        and written to a file.
+        State should not be accessed before calling finalize().
+        """
         pass
 
     def finalize(self):
+        """
+        Do final computations.
+        For example, sorting or mapping of values can be done here.
+        No further input data (commits) should be given after finalizing.
+        """
         pass
 
     def save(self):
+        """
+        Write the results into a file.
+        finalize() should be called before saving.
+        """
         save_json(self.state, f"{Directories.json_outputs}/{self.name}.json")
 
 

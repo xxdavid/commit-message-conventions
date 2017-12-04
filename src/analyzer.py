@@ -2,6 +2,8 @@ from config import Directories
 
 
 class Analyzer:
+    """Class that reads commits and runs analyses on them."""
+
     def __init__(self, analyses):
         self.analyses = analyses
         self.authors = {}

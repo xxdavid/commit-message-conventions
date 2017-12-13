@@ -17,9 +17,10 @@ def fetch_and_parse_commits_for_month(year, month):
             time = strftime("%H:%M:%S", gmtime())
             print(f"[{time}] Downloading commits for {year}-{month}-{day}-{hour}")
             try:
-                fetch_and_parse_commits(f"{year}-{month}-{day:02}-{hour}")
+                fetch_and_parse_commits(f"{year}-{month:02}-{day:02}-{hour}")
             except HTTPError:
                 print("Error, skipping.")
 
 
-fetch_and_parse_commits_for_month(sys.argv[1], sys.argv[2])
+if __name__ == '__main__':
+    fetch_and_parse_commits_for_month(sys.argv[1], sys.argv[2])

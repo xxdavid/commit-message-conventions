@@ -45,3 +45,6 @@ def process_verbs():
 
         for word in additional:
             output_file.write(word + "\n")
+
+
+process_verbs()

@@ -2,6 +2,7 @@
 import sys
 
 from urllib.error import HTTPError
+from json.decoder import JSONDecodeError
 from time import gmtime, strftime
 from fetch_commits import fetch_and_parse_commits
 
@@ -19,7 +20,9 @@ def fetch_and_parse_commits_for_month(year, month):
             try:
                 fetch_and_parse_commits(f"{year}-{month:02}-{day:02}-{hour}")
             except HTTPError:
-                print("Error, skipping.")
+                print("HTTP Error, skipping.")
+            except JSONDecodeError:
+                print("Error in decoding JSON, skipping.")
             sys.stdout.flush()
 
 

@@ -20,6 +20,7 @@ def fetch_and_parse_commits_for_month(year, month):
                 fetch_and_parse_commits(f"{year}-{month:02}-{day:02}-{hour}")
             except HTTPError:
                 print("Error, skipping.")
+            sys.stdout.flush()
 
 
 if __name__ == '__main__':

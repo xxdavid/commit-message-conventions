@@ -27,4 +27,4 @@ def fetch_and_parse_commits_for_month(year, month):
 
 
 if __name__ == '__main__':
-    fetch_and_parse_commits_for_month(sys.argv[1], sys.argv[2])
+    fetch_and_parse_commits_for_month(int(sys.argv[1]), int(sys.argv[2]))

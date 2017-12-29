@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -50,13 +52,18 @@ class Plotter(ABC):
 
     @property
     def text_color(self):
-        return "#000000"
+        return "#424242"
+
+    @property
+    def font_family(self):
+        return "Arial"
 
     def plot(self):
         """Compute the values and create a chart."""
         plt.rcParams['axes.labelcolor'] = self.text_color
         plt.rcParams['xtick.color'] = self.text_color
         plt.rcParams['ytick.color'] = self.text_color
+        plt.rcParams['font.family'] = self.font_family
 
         self.init_plot()
 
@@ -67,8 +74,9 @@ class Plotter(ABC):
 
         plt.tight_layout()
 
-        plt.savefig(f"{Directories.charts}/{self.name}.png", transparent=True)
+        plt.savefig(f"{Directories.charts}/{self.name}.png", transparent=True, dpi=300)
         plt.savefig(f"{Directories.charts}/{self.name}.svg")
+        plt.savefig(f"{Directories.charts}/{self.name}.pdf")
         plt.close()
 
 
@@ -83,7 +91,7 @@ class BarPlotter(Plotter):
 
     @property
     def bar_color(self):
-        return "#259286"
+        return "#FED530"
 
     def init_plot(self):
         values = self.compute_values()
@@ -115,7 +123,7 @@ class LinePlotter(Plotter):
 
         [x, y] = list(zip(*values))
 
-        plt.plot(x, y)
+        plt.plot(x, y, color="#FED530")
 
 
 class WordFrequencyPlotter(BarPlotter):

@@ -13,7 +13,7 @@ def fetch_and_parse_commits_for_month(year, month):
     :param year: year in yyyy format
     :param month: month in mm format
     """
-    for day in range(1, 31):
+    for day in range(1, 32):
         for hour in range(0, 24):
             time = strftime("%H:%M:%S", gmtime())
             print(f"[{time}] Downloading commits for {year}-{month}-{day}-{hour}")

@@ -34,7 +34,7 @@ Run the scripts in the following order
 You can substitute `fetch_commits.py yyyy-mm-dd-hh` with `fetch_commits_for_month.py yyyy-mm` or `./fetch_commits_for_year.py yyyy`.
 
 ## Results
-I analyzed commits from January–November 2017, you can with the charts inside the [results-2017](results-2017/) folder.
+I analyzed commits from the whole 2017, you can with the charts inside the [results-2017](results-2017/) folder.
 
 ## Data sources
 * [Github Archive](https://githubarchive.org) – commits
